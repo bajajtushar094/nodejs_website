@@ -1,0 +1,38 @@
+{
+  "name": "nodejs_blogsite",
+  "version": "1.0.0",
+  "description": "\"Nodejs blog site project for nodejs intro course\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index"
+  },
+  "author": "Tushar Bajaj",
+  "license": "ISC",
+  "dependencies": {
+    "@nestjs/passport": "^7.1.0",
+    "assert": "^1.4.1",
+    "body-parser": "^1.18.3",
+    "bootstrap": "^4.5.0",
+    "connect-flash": "^0.1.1",
+    "ejs": "^3.1.3",
+    "express": "^4.16.3",
+    "express-ejs-layouts": "^2.5.0",
+    "express-session": "^1.17.1",
+    "jquery": "^3.5.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.5.9",
+    "mongoose": "^5.9.25",
+    "mongoose-currency": "^0.2.0",
+    "morgan": "^1.10.0",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^6.0.1",
+    "popper.js": "^1.16.1",
+    "session-file-store": "^1.4.0"
+  },
+  "devDependencies": {
+    "@types/passport-local": "^1.0.33"
+  }
+}

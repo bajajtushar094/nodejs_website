@@ -1,0 +1,91 @@
+// MongoClient.connect(url).then((client)=>{
+
+//     console.log('Connected correctly to server');
+//     const db = client.db(dbname);
+
+//     dboper.insertDocument(db,{ name: "Commerce" , body:"It is good."},
+//         'posts')
+//         .then((result)=>{
+//         console.log('Insert Document:\n',result.ops);
+
+//         return dboper.findDocuments(db, 'posts');
+//         })
+//         .then((docs) => {
+//             console.log('Found Documents:\n',docs);
+
+//             return dboper.updateDocument(db,{name:'Commerce'}, {body:'Updated'},'posts');
+//             })
+//             .then((result)=>{
+//                 console.log('Updated Document:\n',result.result);
+
+//                 return dboper.findDocuments(db,'posts');
+//                 })
+//                 .then((docs)=>{
+//                     console.log('Found Documents:\n',docs);
+
+//                     return db.dropCollection('posts');
+//                     })
+//                     .then ((result)=>{
+//                         console.log('Dropped Collection: result');
+
+//                         return client.close();
+//                     })
+//                     .catch((err)=> console.log(err));
+// })
+// .catch((err) => console.log(err));
+
+
+
+
+
+const url ='mongodb://localhost:27017/blogposts';
+const dbname ='blogposts';
+
+const mongoose =require('mongoose');
+
+const Posts = require('./models/posts');
+const connect = mongoose.connect(url,{ useUnifiedTopology: true,useNewUrlParser: true });
+
+connect.then((db) => {
+
+    console.log('Connected to server ');
+
+    Posts.create({
+        name:'useUnifiedTopology',
+        body:'U'
+
+    })
+        .then((post)=>{
+            console.log(post);
+
+            return Posts.findByIdAndUpdate(post._id,{
+                $set: {body :'New'},
+                new :true
+            }).exec();
+        })
+        .then((post) => {
+            console.log(post);
+
+            post.comments.push({
+                rating: 5,
+                comment: 'I am getting a narrow',
+                author: 'Tushar Bajaj'
+            });
+
+
+            return post.save();
+
+        }).then((post) => {
+
+            console.log(post)
+
+            return Posts.deleteMany({});
+        })
+        .then(() => {
+            return mongoose.connection.close();
+        })
+        .catch((err)=>{
+            console.log(err);
+        });
+
+});
